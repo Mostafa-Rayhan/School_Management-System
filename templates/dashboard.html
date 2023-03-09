@@ -1,0 +1,112 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>Exam Results Dashboard</h2>
+  <form method="get">
+    <label for="class">Class:</label>
+    <select name="class" required>
+      {% for class in classes %}
+        <option value="{{ class.id }}" {% if selected_class == class.id %}selected{% endif %}>{{ class.name }}</option>
+      {% endfor %}
+    </select>
+    <label for="subject">Subject:</label>
+    <select name="subject">
+      <option value="">All Subjects</option>
+      {% for subject in subjects %}
+        <option value="{{ subject.id }}" {% if selected_subject == subject.id %}selected{% endif %}>{{ subject.name }}</option>
+      {% endfor %}
+    </select>
+    <button type="submit">Filter</button>
+  </form>
+  {% if results %}
+    <table>
+      <thead>
+        <tr>
+          <th>Student</th>
+          {% for subject in subjects %}
+            <th>{{ subject.name }}</th>
+          {% endfor %}
+          <th>GPA</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for student, marks, gpa in results %}
+          <tr>
+            <td>{{ student.name }}</td>
+            {% for mark in marks %}
+              <td>{{ mark }}</td>
+            {% endfor %}
+            <td>{{ gpa }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  {% else %}
+    <p>No results found.</p>
+  {% endif %}
+{% endblock %}
+
+
+
+
+
+
+{##}
+{##}
+{#{% extends "base.html" %}#}
+{##}
+{#{% block content %}#}
+{#  <h2>Exam Results Dashboard</h2>#}
+{#  <form method="get">#}
+{#    <label for="class">Class:</label>#}
+{#    <select name="class" required>#}
+{#      {% for class in classes %}#}
+{#        <option value="{{ class.id }}" {% if selected_class == class.id %}selected{% endif %}>{{ class.name }}</option>#}
+{#      {% endfor %}#}
+{#    </select>#}
+{#    <label for="subject">Subject:</label>#}
+{#    <select name="subject">#}
+{#      <option value="">All Subjects</option>#}
+{#      {% for subject in subjects %}#}
+{#      {% endfor %}#}
+{#    </select>#}
+{#    <button type="submit" class="btn btn-primary">Filter</button>#}
+{#  </form>#}
+{#{% endblock %}#}
+{##}
+
+{#        #}
+{#        <!DOCTYPE html>#}
+{#<html>#}
+{#  <head>#}
+{#    <title>School Management System - Dashboard</title>#}
+{#    <meta charset="UTF-8">#}
+{#    <meta name="viewport" content="width=device-width, initial-scale=1.0">#}
+{#    <!-- Add any required CSS and JavaScript libraries here -->#}
+{#  </head>#}
+{#  <body>#}
+{#    <div class="container">#}
+{#      <h1>School Management System</h1>#}
+{#      <h2>Dashboard</h2>#}
+{#      <form method="get">#}
+{#        <div class="form-group">#}
+{#          <label for="class">Class:</label>#}
+{#          <select name="class" id="class" class="form-control">#}
+{#            <!-- Add options for all available classes here -->#}
+{#          </select>#}
+{#        </div>#}
+{#        <div class="form-group">#}
+{#          <label for="subject">Subject:</label>#}
+{#          <select name="subject" id="subject" class="form-control">#}
+{#            <!-- Add options for all available subjects for the selected class here -->#}
+{#          </select>#}
+{#        </div>#}
+{#        <button type="submit" class="btn btn-primary">Filter</button>#}
+{#      </form>#}
+{#      <div class="results">#}
+{#        <!-- Add the summary of the results here based on the selected filters -->#}
+{#      </div>#}
+{#    </div>#}
+{#    <!-- Add any required JavaScript code here -->#}
+{#  </body>#}
+{#</html>#}

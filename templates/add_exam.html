@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h2>Add a new exam result</h2>
+  <form method="post">
+    {% csrf_token %}
+    <label for="student">Student:</label>
+    <select name="student" required>
+      {% for student in students %}
+        <option value="{{ student.id }}">{{ student.name }}</option>
+      {% endfor %}
+    </select>
+    <label for="subject">Subject:</label>
+    <select name="subject" required>
+      {% for subject in subjects %}
+        <option value="{{ subject.id }}">{{ subject.name }}</option>
+      {% endfor %}
+    </select>
+    <label for="marks">Marks:</label>
+    <input type="number" name="marks" required>
+    <button type="submit">Add Exam Result</button>
+  </form>
+{% endblock %}
